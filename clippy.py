@@ -35,11 +35,10 @@ def add_bookmark(key, value):
 
     bookmarks[key] = value
     with open(config_path, "w") as file:
-        json.dump(bookmarks, file, indent=4)  # Save to file
+        json.dump(bookmarks, file, indent=4)
     print(f"{colored("󱫉", "green")} Bookmark added: {key} -> {value}")
 
 
-# Example of copying a bookmarked item to clipboard
 def copy_bookmark(key):
     bookmarks = load_bookmarks()
     if key in bookmarks:
@@ -49,12 +48,26 @@ def copy_bookmark(key):
         print(f"{colored("󱫊", "red")} No bookmark found for '{key}'")
 
 
+def remove_bookmark(key):
+    bookmarks = load_bookmarks()
+
+    if key not in bookmarks:
+        print(f"{colored("󱫈", "red")} Key '{key}' does not exist. Use a different key.")
+        return
+
+    bookmarks.pop(key)
+    with open(config_path, "w") as file:
+        json.dump(bookmarks, file, indent=4)
+    print(f"{colored("󱫇", "green")} Bookmark removed: {key}")
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-d", "--display", help="display available keys in the clipboard", action="store_true")
     parser.add_argument('-a', '--add', nargs=1, metavar=('KEY'), help="Add a bookmark with key and auto recognized pasted content")
     parser.add_argument('-b', '--bookmark', nargs=2, metavar=('KEY', 'VALUE'), help="Add a bookmark with key and self entered value")
     parser.add_argument('-c', '--copy', nargs=1, metavar=('KEY'), help="Copy the value of a selected key")
+    parser.add_argument('-r', '--remove', nargs=1, metavar=('KEY'), help="Delete a selected key")
     args = parser.parse_args()
 
     if args.display:
@@ -70,3 +83,6 @@ if __name__ == "__main__":
     elif args.copy:
         key = ', '.join(map(str, args.copy))
         copy_bookmark(key)
+    elif args.remove:
+        key = ', '.join(map(str, args.remove))
+        remove_bookmark(key)
