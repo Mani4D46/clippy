@@ -28,7 +28,7 @@ def display_bookmarks():
 
 def add_bookmark(key, value):
     bookmarks = load_bookmarks()
-    
+
     if key in bookmarks:
         print(f"{colored("󱫈", "red")} Key '{key}' already exists. Use a different key.")
         return
