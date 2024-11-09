@@ -24,7 +24,7 @@ def load_bookmarks():
 def display_bookmarks():
     bookmarks = load_bookmarks()
     for key, value in bookmarks.items():
-        print(f"{colored(key, "red")}: {colored(value, "yellow")}")
+        print(f"{colored(key, "blue")}: {value}")
     return bookmarks
 
 
