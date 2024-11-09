@@ -5,6 +5,9 @@
 
 </div>
 
+## Data
+The data is stored at `.config/clippy.json`.
+
 ## Installation:
 1) Firstly install the modules:<br>
 `pip install -r requirements.txt`<br>
