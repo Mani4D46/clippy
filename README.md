@@ -41,4 +41,17 @@ The overall storing process is as `KEY: VALUE` inside a json file at `.config/cl
   -rt, --removetui      same as -r but gives an input field
 ```
 
-The difference between `--add` and `--bookmark` is that let's say you've copied `anexamplevalue` and want to save it as `akey` you do `clippy -a akey` and it saves `anexamplevalue` with key `akey`. On the other hand if you want to input the value yourself you use `bookmark` as `clippy -b akey anexamplevalue`. Both save the same thing except that with `-b` you get more flexibility and with `-a` you get speed and convenience.
+The difference between `--add` and `--bookmark` is that let's say you've copied `anexamplevalue` and want to save it as `akey` you do `clippy -a akey` and it saves `anexamplevalue` with key `akey`. On the other hand if you want to input the value yourself you use `bookmark` as `clippy -b akey anexamplevalue`. Both save the same thing except that with `-b` you get more flexibility and with `-a` you get speed and convenience.<br>
+
+## Clippy as a popup
+You can use Clippy as a popup by configuring your WM/DEs keybinds.
+Here's my config using i3wm and alacritty
+
+```
+for_window [class="Clippy"] floating enable, move position center, resize set 300 440, focus
+bindsym $mod+c exec --no-startup-id alacritty --class "Clippy" -e clippy -cb -n
+bindsym $mod+Control+a exec --no-startup-id alacritty --class "Clippy" -e clippy -at -n
+bindsym $mod+Control+b exec --no-startup-id alacritty --class "Clippy" -e clippy -bt -n
+bindsym $mod+Control+c exec --no-startup-id alacritty --class "Clippy" -e clippy -ct -n
+bindsym $mod+Control+r exec --no-startup-id alacritty --class "Clippy" -e clippy -rt -n
+```
