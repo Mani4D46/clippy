@@ -25,14 +25,20 @@ You can use it as a clipboard or a bookmark storage or for any other purpose! It
 The overall storing process is as `KEY: VALUE` inside a json file at `.config/clippy.json`.<br>
 
 ### Flags:
-  `-h`, `--help`            show this help message and exit<br>
-  `-d`, `--display`         display available keys in the clipboard<br>
-  `-a KEY`, `--add KEY`     Add a bookmark with key and auto<br>
-                            recognized copied content<br>
-  `-b KEY VALUE`, `--bookmark KEY VALUE`<br>
-                            Add a bookmark with key and self<br>
-                            entered value<br>
-  `-c KEY`, `--copy KEY`    Copy the value of a selected key<br>
-  `-r KEY`, `--remove KEY`  Delete a selected key<br>
+```
+  -h, --help            show this help message and exit
+  -d, --display         display available keys with vals in the clipboard
+  -cb, --clipboard      display only available vals in the clipboard
+  -n, --noquit          doesn't quit after doing the job
+  -a KEY, --add KEY     Add a bookmark with key and auto recognized pasted content
+  -b KEY VALUE, --bookmark KEY VALUE
+                        Add a bookmark with key and self entered value
+  -c KEY, --copy KEY    Copy the value of a selected key
+  -r KEY, --remove KEY  Delete a selected key
+  -at, --addtui         same as -a but gives an input field
+  -bt, --bookmarktui    same as -b but gives input fields
+  -ct, --copytui        same as -c but gives an input field
+  -rt, --removetui      same as -r but gives an input field
+```
 
 The difference between `--add` and `--bookmark` is that let's say you've copied `anexamplevalue` and want to save it as `akey` you do `clippy -a akey` and it saves `anexamplevalue` with key `akey`. On the other hand if you want to input the value yourself you use `bookmark` as `clippy -b akey anexamplevalue`. Both save the same thing except that with `-b` you get more flexibility and with `-a` you get speed and convenience.
