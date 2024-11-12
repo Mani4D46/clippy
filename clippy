@@ -66,6 +66,7 @@ def remove_bookmark(key):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-d", "--display", help="display available keys in the clipboard", action="store_true")
+    parser.add_argument("-n", "--noquit", help="doesn't quit after doing the job", action="store_true")
     parser.add_argument('-a', '--add', nargs=1, metavar=('KEY'), help="Add a bookmark with key and auto recognized pasted content")
     parser.add_argument('-b', '--bookmark', nargs=2, metavar=('KEY', 'VALUE'), help="Add a bookmark with key and self entered value")
     parser.add_argument('-c', '--copy', nargs=1, metavar=('KEY'), help="Copy the value of a selected key")
@@ -88,3 +89,6 @@ if __name__ == "__main__":
     elif args.remove:
         key = ', '.join(map(str, args.remove))
         remove_bookmark(key)
+    
+    if args.noquit:
+        input()
