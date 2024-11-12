@@ -77,12 +77,20 @@ if __name__ == "__main__":
     parser.add_argument('-b', '--bookmark', nargs=2, metavar=('KEY', 'VALUE'), help="Add a bookmark with key and self entered value")
     parser.add_argument('-c', '--copy', nargs=1, metavar=('KEY'), help="Copy the value of a selected key")
     parser.add_argument('-r', '--remove', nargs=1, metavar=('KEY'), help="Delete a selected key")
+
+    # For TUI users:
+    parser.add_argument("-at", "--addtui", help="same as -a but gives an input field", action="store_true")
+    parser.add_argument("-bt", "--bookmarktui", help="same as -b but gives input fields", action="store_true")
+    parser.add_argument("-ct", "--copytui", help="same as -c but gives an input field", action="store_true")
+    parser.add_argument("-rt", "--removetui", help="same as -r but gives an input field", action="store_true")
+
     args = parser.parse_args()
 
     if args.display:
         print(colored(" Here is your clipboard:", "green"))
         display_bookmarks()
     if args.clipboard:
+        print(colored("  Clipboard: ", "black", "on_white"))
         display_clipboard()
     elif args.add:
         key = ', '.join(map(str, args.add))  # Join list elements into a single string
@@ -97,6 +105,23 @@ if __name__ == "__main__":
     elif args.remove:
         key = ', '.join(map(str, args.remove))
         remove_bookmark(key)
+
+    # TUI parsing
+    elif args.addtui:
+        key = input(colored(" Enter key: ", "black", "on_white") + " ")
+        value = str(pyperclip.paste())
+        add_bookmark(key, value)
+    elif args.bookmarktui:
+        key = input(colored(" Enter key:   ", "black", "on_white") + " ")
+        value = input(colored(" Enter value: ", "black", "on_white") + " ")
+        add_bookmark(key, value)
+    elif args.copytui:
+        key = input(colored(" Enter key: ", "black", "on_white") + " ")
+        copy_bookmark(key)
+    elif args.removetui:
+        key = input(colored(" Enter key: ", "black", "on_white") + " ")
+        remove_bookmark(key)
+
     
     if args.noquit:
         input()
